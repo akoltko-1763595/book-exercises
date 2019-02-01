@@ -3,28 +3,28 @@
 # Create a vector of 100 employees ("Employee 1", "Employee 2", ... "Employee 100")
 # Hint: use the `paste()` function and vector recycling to add a number to the word
 # "Employee"
-
+employees <- paste("Employee", 1:100)
 
 # Create a vector of 100 random salaries for the year 2017
 # Use the `runif()` function to pick random numbers between 40000 and 50000
-
+salaries17 <- runif(100, 40000, 50000)
 
 # Create a vector of 100 annual salary adjustments between -5000 and 10000.
 # (A negative number represents a salary decrease due to corporate greed)
 # Again use the `runif()` function to pick 100 random numbers in that range.
-
+Salary_changes <- runif(100, -5000, 10000)
 
 # Create a data frame `salaries` by combining the 3 vectors you just made
 # Remember to set `stringsAsFactors=FALSE`!
-
+salaries <- data.frame(employees, salaries17, Salary_changes, stringsAsFactors = FALSE)
 
 # Add a column to the `salaries` data frame that represents each person's
 # salary in 2018 (e.g., with the salary adjustment added in).
-
+salaries$salaries18 <- salaries$salaries17 + salaries$Salary_changes
 
 # Add a column to the `salaries` data frame that has a value of `TRUE` if the 
 # person got a raise (their salary went up)
-
+salaries$good_employee <- Salary_changes > 0
 
 
 ### Retrieve values from your data frame to answer the following questions
@@ -32,19 +32,19 @@
 ### cell rather than the whole row!)
 
 # What was the 2018 salary of Employee 57
-
+salaries$salaries18[57]
 
 # How many employees got a raise?
-
+nrow(salaries[salaries$good_employee == TRUE, ])
 
 # What was the dollar value of the highest raise?
-
+max_raise <- max(salaries$Salary_changes)
 
 # What was the "name" of the employee who received the highest raise?
-
+salaries[salaries$Salary_changes == max_raise, ]$employees
 
 # What was the largest decrease in salaries between the two years?
-
+max_deduct <- min(salaries$Salary_changes)
 
 # What was the name of the employee who recieved largest decrease in salary?
 
@@ -59,4 +59,4 @@
 ## how you generated the salaries?
 
 # Write a .csv file of your salary data to your working directory
-
+write.csv(salaries, file = "salaries.csv")

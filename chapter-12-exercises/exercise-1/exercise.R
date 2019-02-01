@@ -1,7 +1,7 @@
 # Exercise 1: analyzing avocado sales with the `tidyr` package
 
 # Load necessary packages (`tidyr`, `dplyr`, and `ggplot2`)
-
+library()
 
 # Set your working directory using the RStudio menu:
 # Session > Set Working Directory > To Source File Location
